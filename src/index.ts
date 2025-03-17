@@ -1,6 +1,6 @@
 import { getJPStockPrices } from "./getJPStockPrices";
 import { getUSStockPrices } from "./getUSStockPrices";
-import { getcryptooPrices } from "./getcryptooPrices";
+import { getcryptoPrices } from "./getcryptoPrices";
 import { calculateChanges, PriceData } from "./calculateChanges";
 import { sendDiscordMessage } from "./sendDiscordNotification";
 import fs from "fs";
