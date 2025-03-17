@@ -10,7 +10,7 @@ export type PriceData = {
   export const calculateChanges = (
     prices: Record<string, number>,
     history: PriceData,
-    type: "stock" | "cryptoo" | "us_stock"
+    type: "jp_stock" | "cryptoo" | "us_stock"
   ): string => {
     let message = "";
   

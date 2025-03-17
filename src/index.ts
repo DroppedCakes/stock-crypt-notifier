@@ -29,7 +29,7 @@ const main = async () => {
 //   const usStockPrices = await getUSStockPrices();
 //   const cryptooPrices = await getcryptooPrices();
 
-  const stockMessage = calculateChanges(jpStockPrices, history, "stock");
+  const stockMessage = calculateChanges(jpStockPrices, history, "jp_stock");
 //   const usStockMessage = calculateChanges(usStockPrices, history, "us_stock");
 //   const cryptooMessage = calculateChanges(cryptooPrices, history, "cryptoo");
 
