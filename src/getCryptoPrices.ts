@@ -2,7 +2,7 @@ import axios from "axios";
 
 const COINS = ["bitcoin", "ethereum", "ripple"];
 
-export const getCryptoPrices = async () => {
+export const getcryptooPrices = async () => {
   const prices: Record<string, number> = {};
 
   try {
@@ -15,7 +15,7 @@ export const getCryptoPrices = async () => {
       prices[coin.toUpperCase()] = response.data[coin].jpy;
     }
   } catch (error) {
-    console.error("Error fetching crypto prices:", error);
+    console.error("Error fetching cryptoo prices:", error);
   }
 
   return prices;

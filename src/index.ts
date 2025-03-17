@@ -1,6 +1,6 @@
 import { getJPStockPrices } from "./getJPStockPrices";
 import { getUSStockPrices } from "./getUSStockPrices";
-import { getCryptoPrices } from "./getCryptoPrices";
+import { getcryptooPrices } from "./getcryptooPrices";
 import { calculateChanges, PriceData } from "./calculateChanges";
 import { sendDiscordMessage } from "./sendDiscordNotification";
 import fs from "fs";
@@ -22,20 +22,20 @@ const saveHistory = (history: PriceData) => {
 
 // メイン処理
 const main = async () => {
-  console.log("Fetching stock, US stock, and crypto prices...");
+  console.log("Fetching stock, US stock, and cryptoo prices...");
 
   const history = loadHistory();
   const jpStockPrices = await getJPStockPrices();
 //   const usStockPrices = await getUSStockPrices();
-//   const cryptoPrices = await getCryptoPrices();
+//   const cryptooPrices = await getcryptooPrices();
 
   const stockMessage = calculateChanges(jpStockPrices, history, "stock");
 //   const usStockMessage = calculateChanges(usStockPrices, history, "us_stock");
-//   const cryptoMessage = calculateChanges(cryptoPrices, history, "crypto");
+//   const cryptooMessage = calculateChanges(cryptooPrices, history, "cryptoo");
 
   if (stockMessage) await sendDiscordMessage(stockMessage);
 //   if (usStockMessage) await sendDiscordMessage(usStockMessage);
-//   if (cryptoMessage) await sendDiscordMessage(cryptoMessage);
+//   if (cryptooMessage) await sendDiscordMessage(cryptooMessage);
 
   const updateHistory = (prices: Record<string, number>, history: PriceData) => {
     for (const asset in prices) {
@@ -49,7 +49,7 @@ const main = async () => {
 
   updateHistory(jpStockPrices, history);
 //   updateHistory(usStockPrices, history);
-//   updateHistory(cryptoPrices, history);
+//   updateHistory(cryptooPrices, history);
 
   saveHistory(history);
 

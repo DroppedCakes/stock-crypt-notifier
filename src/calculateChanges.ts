@@ -10,7 +10,7 @@ export type PriceData = {
   export const calculateChanges = (
     prices: Record<string, number>,
     history: PriceData,
-    type: "stock" | "crypto" | "us_stock"
+    type: "stock" | "cryptoo" | "us_stock"
   ): string => {
     let message = "";
   
@@ -25,7 +25,7 @@ export type PriceData = {
       const monthlyChange = ((currentPrice - monthlyPrice) / monthlyPrice) * 100;
   
       const emoji =
-        type === "crypto" ? ":robot:" : type === "us_stock" ? ":flag_us:" : "📈";
+        type === "cryptoo" ? ":robot:" : type === "us_stock" ? ":flag_us:" : "📈";
       const color = dailyChange >= 0 ? ":green_circle:" : ":red_circle:";
   
       message += `${emoji} ${asset} / ${currentPrice} ${color} / 前日比${dailyChange.toFixed(2)}% / 先週比${weeklyChange.toFixed(2)}% / 先月比${monthlyChange.toFixed(2)}%\n`;
