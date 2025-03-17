@@ -1,6 +1,6 @@
 import { getJPStockPrices } from "./getJPStockPrices";
-import { getUSStockPrices } from "./getUSStockPrices";
-import { getcryptoPrices } from "./getcryptoPrices";
+// import { getUSStockPrices } from "./getUSStockPrices";
+// import { getCryptoPrices } from "./getCryptoPrices";
 import { calculateChanges, PriceData } from "./calculateChanges";
 import { sendDiscordMessage } from "./sendDiscordNotification";
 import fs from "fs";
@@ -22,34 +22,38 @@ const saveHistory = (history: PriceData) => {
 
 // メイン処理
 const main = async () => {
-  console.log("Fetching stock, US stock, and cryptoo prices...");
+  console.log("Fetching JP stocks, US stocks, and crypto prices...");
 
   const history = loadHistory();
   const jpStockPrices = await getJPStockPrices();
-//   const usStockPrices = await getUSStockPrices();
-//   const cryptooPrices = await getcryptooPrices();
+  // const usStockPrices = await getUSStockPrices();
+  // const cryptoPrices = await getCryptoPrices();
 
-  const stockMessage = calculateChanges(jpStockPrices, history, "jp_stock");
-//   const usStockMessage = calculateChanges(usStockPrices, history, "us_stock");
-//   const cryptooMessage = calculateChanges(cryptooPrices, history, "cryptoo");
+  const jpStockMessage = calculateChanges(jpStockPrices, history, "jp_stock");
+  // const usStockMessage = calculateChanges(usStockPrices, history, "us_stock");
+  // const cryptoMessage = calculateChanges(cryptoPrices, history, "crypto");
 
-  if (stockMessage) await sendDiscordMessage(stockMessage);
-//   if (usStockMessage) await sendDiscordMessage(usStockMessage);
-//   if (cryptooMessage) await sendDiscordMessage(cryptooMessage);
+  if (jpStockMessage) await sendDiscordMessage(jpStockMessage);
+  // if (usStockMessage) await sendDiscordMessage(usStockMessage);
+  // if (cryptoMessage) await sendDiscordMessage(cryptoMessage);
 
-  const updateHistory = (prices: Record<string, number>, history: PriceData) => {
+  const updateHistory = (
+    prices: Record<string, { name: string; price: number }>,
+    history: PriceData
+  ) => {
     for (const asset in prices) {
       if (!history[asset]) history[asset] = { current: 0, previous: 0, weekly: 0, monthly: 0 };
 
-      history[asset].previous = prices[asset];
-      if (new Date().getDay() === 1) history[asset].weekly = prices[asset];
-      if (new Date().getDate() === 1) history[asset].monthly = prices[asset];
+      history[asset].name = prices[asset].name;
+      history[asset].previous = prices[asset].price;
+      if (new Date().getDay() === 1) history[asset].weekly = prices[asset].price;
+      if (new Date().getDate() === 1) history[asset].monthly = prices[asset].price;
     }
   };
 
   updateHistory(jpStockPrices, history);
-//   updateHistory(usStockPrices, history);
-//   updateHistory(cryptooPrices, history);
+  // updateHistory(usStockPrices, history);
+  // updateHistory(cryptoPrices, history);
 
   saveHistory(history);
 

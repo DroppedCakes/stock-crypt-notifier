@@ -2,7 +2,7 @@ import axios from "axios";
 
 const COINS = ["bitcoin", "ethereum", "ripple"];
 
-export const getcryptoPrices = async () => {
+export const getCryptoPrices = async () => {
   const prices: Record<string, number> = {};
 
   try {
